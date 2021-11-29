@@ -1,0 +1,17 @@
+{% extends 'main.html' %}
+
+{% block title %} Film form {% endblock %}
+
+{% block side %}
+
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">Create movie</button>
+
+  </form>
+
+  <a href="{% url 'index_movies' %}">Back</a>
+
+{% endblock %}
