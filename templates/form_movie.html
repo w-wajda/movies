@@ -1,5 +1,5 @@
 {% extends 'main.html' %}
-
+{% load bootstrap %}
 {% block title %} Film form {% endblock %}
 
 {% block side %}
@@ -7,7 +7,7 @@
 
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form }}
+    {{ form|bootstrap }}
     <button type="submit">Create movie</button>
 
   </form>

@@ -1,5 +1,5 @@
 {% extends 'main.html' %}
-
+{% load bootstrap %}
 {% block title %} Login {% endblock %}
 
 {% block side %}
@@ -7,7 +7,7 @@
   <form method="post">
 
     {% csrf_token %}
-    {{ form }}
+    {{ form|bootstrap }}
     <button type="submit">Login</button>
 
   </form>
