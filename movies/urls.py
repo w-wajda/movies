@@ -25,6 +25,3 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-#  <a href="{% url 'login' %}">Login</a>
-#  <a href="{% url 'logout'%}">Logout</a>

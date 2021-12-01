@@ -1,4 +1,4 @@
-{% extends 'main.html' %}
+{% extends 'base.html' %}
 {% block title %} Confirm movie {% endblock %}
 {% block side %}
 
@@ -13,8 +13,6 @@
     </div>
   </div>
 
-  <br>
-
-  <a href="{% url 'index_movies' %}" class="btn btn-primary all_buttons">Cofnij<i class="fas fa-step-backward icon_in_button"></i></a>
+  <a href="{% url 'index_movies' %}" class="btn btn-primary all_buttons mt-3">Cofnij<i class="fas fa-step-backward icon_in_button"></i></a>
 
 {% endblock %}
