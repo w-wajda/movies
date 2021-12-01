@@ -133,5 +133,5 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = 'my_media'
 
 LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'index_movies'
+LOGIN_REDIRECT_URL = 'main_movies'
 LOGOUT_REDIRECT_URL = 'login'

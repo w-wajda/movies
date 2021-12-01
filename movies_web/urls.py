@@ -5,7 +5,7 @@ from movies_web.views import main_movies, \
     delete_movie
 
 urlpatterns = [
-    path('main/', main_movies, name='index_movies'),
+    path('main/', main_movies, name='main_movies'),
     path('new/', create_movie, name='create_movie'),
     path('edit/<int:id>/', update_movie, name='update_movie'),
     path('delete/<int:id>/', delete_movie, name='delete_movie'),
