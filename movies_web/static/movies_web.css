@@ -1,3 +1,48 @@
 body {
-    padding: 2rem;
+    padding: 3rem;
+    background: lightblue;
 }
+
+.card-login{
+    position: relative;
+    left: 450px;
+    top: 45px;
+}
+
+.color_text{
+    color: blue;
+}
+
+.movie-poster {
+    width: 150px;
+    float: left;
+}
+
+.logout_buttons {
+    width: 8rem;
+    position: relative;
+    left: 1250px;
+}
+
+.all_buttons {
+    width: 8rem;
+    position: relative;
+}
+
+.icon_edit {
+    font-size: 1.3rem;
+    color: green;
+}
+
+.icon_delete {
+    font-size: 1.3rem;
+    color: red;
+}
+
+.icon_in_button {
+    font-size: 15px;
+    position: relative;
+    left: 5px;
+    color: white;
+}
+

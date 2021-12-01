@@ -1,17 +1,20 @@
 {% extends 'main.html' %}
-
 {% block title %} Confirm movie {% endblock %}
-
 {% block side %}
 
-  <h1>Do you want to delete "{{ movie.title }}" movie? </h1>
-  <form method="post">
+  <div class="card" style="width: 38rem">
+    <div class="card-body">
+      <h5 class="color_text">Czy napewno chcesz usunąć: "{{ movie.title }}" film?</h5>
+      <br>
+        <form method="post">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger all_buttons">Usuń film<i class="fas fa-trash-alt icon_in_button"></i></button>
+        </form>
+    </div>
+  </div>
 
-    {% csrf_token %}
-    <button type="submit">Delete movie</button>
+  <br>
 
-  </form>
-
-  <a href="{% url 'index_movies' %}">Back</a>
+  <a href="{% url 'index_movies' %}" class="btn btn-primary all_buttons">Cofnij<i class="fas fa-step-backward icon_in_button"></i></a>
 
 {% endblock %}

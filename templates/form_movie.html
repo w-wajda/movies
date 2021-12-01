@@ -4,14 +4,31 @@
 
 {% block side %}
 
+    <div class="card" style="width: 38rem">
+      <div class="card-body">
+        {% if new %}
+          <h5 class="color_text">Nowy film</h5>
+        {% else %}
+          <h5 class="color_text">Edytuj film</h5>
+        {% endif %}
 
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form|bootstrap }}
-    <button type="submit">Create movie</button>
+        <br>
 
-  </form>
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ form|bootstrap }}
+          <br>
+          {% if new %}
+            <button type="submit" class="btn btn-primary all_buttons">Dodaj<i class="fas fa-plus-square icon_in_button"></i></button>
+          {% else %}
+            <button type="submit" class="btn btn-primary all_buttons">Edytuj<i class="fas fa-edit icon_in_button"></i></button>
+          {% endif %}
+        </form>
+      </div>
+    </div>
 
-  <a href="{% url 'index_movies' %}">Back</a>
+  <br>
+
+  <a href="{% url 'index_movies'%}" class="btn btn-primary all_buttons">Cofnij<i class="fas fa-step-backward icon_in_button"></i></a>
 
 {% endblock %}

@@ -4,13 +4,15 @@
 
 {% block side %}
 
-  <div class="card" style="width: 26rem;">
+  <div class="card card-login" style="width: 26rem;">
     <div class="card-body">
-      <h5 class="card-title">Log in</h5>
+      <h5 class="card-title color_text">Zaloguj się</h5>
+      <br>
       <form method="post">
         {% csrf_token %}
         {{ form|bootstrap }}
-        <button type="submit" class="btn btn-primary">Login <i class="fas fa-sign-in-alt"></i></button>
+        <br>
+        <button type="submit" class="btn btn-primary all_buttons">Zaloguj<i class="fas fa-sign-in-alt icon_in_button"></i></button>
       </form>
     </div>
   </div>

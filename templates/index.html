@@ -1,29 +1,48 @@
 {% extends 'main.html' %}
-
 {% block title %} List of movies {% endblock %}
-
 {% block side %}
 
-  {% if user.is_authenticated %}
-    Witaj {{ user.username }}<br>
-    <a href="{% url 'logout' %}">Logout</a>
-  {% else %}
-    <a href="{% url 'login' %}">Login</a>
-  {% endif %}
+  <div class="alert alert-light" role="alert">
+    {% if user.is_authenticated %}
+      <h1 class="display-5 color_text">Witaj {{ user.username }}</h1>
+      <a href="{% url 'logout' %}" class="btn btn-primary logout_buttons">Wyloguj<i class="fas fa-sign-out-alt icon_in_button"></i></a>
+    {% else %}
+      <a href="{% url 'login' %}" class="btn btn-primary all_buttons">Zaloguj<i class="fas fa-sign-in-alt icon_in_button"></i></a>
+    {% endif %}
+  </div>
 
-  <hr>
-
-  <a href="{% url 'create_movie' %}">Create</a>
+  <a href="{% url 'create_movie' %}" class="btn btn-primary all_buttons">Dodaj film<i class="fas fa-plus-square icon_in_button"></i></a>
 
   {% if movies|length == 0 %}
     <h2>Brak filmów</h2>
   {% else %}
-    <h2>Ilość filmów w BD: {{ movies|length }}</h2>
+    <!--<h2>Ilość filmów: {{ movies|length }} </h2> -->
+    <br>
     {% for movie in movies %}
-      <h3>{{movie}}</h3>
-      <p>{{ movie.description }}</p>
-      <a href="{% url 'update_movie' movie.id  %}">Update</a>
-      <a href="{% url 'delete_movie' movie.id  %}">Delete</a>
+      <br>
+      <div class="card" style="width: 38rem">
+        <div class="card-body">
+
+          <img src="/media/{{ movie.poster }}" class="movie-poster">
+
+          <div class="row">
+            <div class="col-10">
+              <h5 class="color_text">{{movie}}</h5>
+            </div>
+            <div class="col-2">
+              <a href="{% url 'update_movie' movie.id  %}"><i class="fas fa-edit icon_edit"></i></a>
+              <a href="{% url 'delete_movie' movie.id  %}"><i class="fas fa-trash-alt icon_delete"></i></a>
+            </div>
+          </div>
+
+          <div class="row">
+              <p class="card-text">{{ movie.description }}</p>
+          </div>
+
+        </div>
+
+      </div>
+
     {% endfor %}
   {% endif %}
 
