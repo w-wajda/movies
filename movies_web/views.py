@@ -3,8 +3,8 @@ from django.shortcuts import (
     get_object_or_404,
     redirect
 )
-from movies_web.models import Movie, AdditionalInfo
-from movies_web.forms import MovieForm, AdditionalInfoForm
+from movies_web.models import Movie, AdditionalInfo, Rating, Actor
+from movies_web.forms import MovieForm, AdditionalInfoForm, RatingForm, ActorForm
 from django.contrib.auth.decorators import login_required
 
 
@@ -30,8 +30,15 @@ def create_movie(request):
 
 
 @login_required
+def details_movie(request, id):
+    movie = get_object_or_404(Movie, pk=id)
+    return render(request, 'details_movie.html', {'movie': movie})
+
+
+@login_required
 def update_movie(request, id):
     movie = get_object_or_404(Movie, pk=id)
+    ratings = Rating.objects.filter(film=movie)
 
     try:
         additional = AdditionalInfo.objects.get(movie=movie.id)
@@ -40,6 +47,13 @@ def update_movie(request, id):
 
     form_movie = MovieForm(request.POST or None, request.FILES or None, instance=movie)
     form_additional = AdditionalInfoForm(request.POST or None, instance=additional)
+    form_rating = RatingForm(request.POST or None)
+
+    if request.method == 'POST':
+        if 'gwiazdki' in request.POST:
+            rating = form_rating.save(commit=False)
+            rating.film = movie
+            rating.save()
 
     if form_movie.is_valid() and form_additional.is_valid():
         movie = form_movie.save(commit=False)
@@ -47,7 +61,9 @@ def update_movie(request, id):
         movie.dodatkowe = additional
         movie.save()
 
-    return render(request, 'form_movie.html', {'form': form_movie, 'form_additional': form_additional, 'new': False})
+    return render(request, 'form_movie.html', {'form': form_movie, 'form_additional': form_additional,
+                                               'ratings': ratings, 'form_rating': form_rating,
+                                               'new': False})
 
 
 @login_required

@@ -4,16 +4,14 @@
 
 {% block side %}
 
-    <div class="card" style="width: 38rem">
+    <div class="card" style="width: 38rem; float: left; margin-right: 3rem;">
       <div class="card-body">
         {% if new %}
           <h5 class="color_text">Nowy film</h5>
         {% else %}
           <h5 class="color_text">Edytuj film</h5>
         {% endif %}
-
         <br>
-
         <form method="post" enctype="multipart/form-data">
           {% csrf_token %}
           {{ form|bootstrap }}
@@ -28,7 +26,24 @@
       </div>
     </div>
 
+    <div class="card" style="width: 38rem; margin-left: 5rem;">
+      <div class="card-body">
+        <h5 class="color_text">Oceń film</h5>
+        <br>
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ form_rating|bootstrap }}
+          <br>
+          <button type="submit" class="btn btn-primary all_buttons">Oceń<i class="fas fa-edit icon_in_button"></i></button>
+        </form>
+      </div>
+    </div>
+    <br>
+    {% for rating in ratings %}
+      <h4>Gwiazdki: {{ rating.gwiazdki }}</h4>
+      <p>Recenzja: {{ rating.recenzja }}</p>
+    {% endfor %}
 
-  <a href="{% url 'main_movies'%}" class="btn btn-primary all_buttons mt-3">Cofnij<i class="fas fa-step-backward icon_in_button "></i></a>
+    <a href="{% url 'main_movies'%}" class="btn btn-primary all_buttons mt-3">Cofnij<i class="fas fa-step-backward icon_in_button "></i></a>
 
 {% endblock %}

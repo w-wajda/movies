@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% block title %} Film form {% endblock %}
+
+{% block side %}
+
+  <h2>Szczegóły filmu {{ movie }}</h2>
+        <div class="card mb-3" style="width: 38rem">
+        <div class="card-body">
+          <img src="/media/{{ movie.poster }}" class="movie-poster">
+          <div class="row">
+            <div class="col-10">
+              <a href="{% url 'details_movie' movie.id %}"><h5 class="color_text">{{movie}}</h5></a>
+            </div>
+            <div class="col-2">
+              <a href="{% url 'update_movie' movie.id  %}"><i class="fas fa-edit icon_edit"></i></a>
+              <a href="{% url 'delete_movie' movie.id  %}"><i class="fas fa-trash-alt icon_delete"></i></a>
+            </div>
+          </div>
+          <div class="row">
+              <p class="card-text">{{ movie.description }}</p>
+          </div>
+        </div>
+      </div>
+
+
+
+  <a href="{% url 'main_movies' %}" class="btn btn-primary all_buttons mt-3">Cofnij<i class="fas fa-step-backward icon_in_button"></i></a>
+
+{% endblock %}
+
+
