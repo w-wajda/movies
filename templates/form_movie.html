@@ -17,6 +17,7 @@
         <form method="post" enctype="multipart/form-data">
           {% csrf_token %}
           {{ form|bootstrap }}
+          {{ form_additional|bootstrap }}
           <br>
           {% if new %}
             <button type="submit" class="btn btn-primary all_buttons">Dodaj<i class="fas fa-plus-square icon_in_button"></i></button>

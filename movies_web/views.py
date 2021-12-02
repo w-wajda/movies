@@ -3,8 +3,8 @@ from django.shortcuts import (
     get_object_or_404,
     redirect
 )
-from movies_web.models import Movie
-from movies_web.forms import MovieForm
+from movies_web.models import Movie, AdditionalInfo
+from movies_web.forms import MovieForm, AdditionalInfoForm
 from django.contrib.auth.decorators import login_required
 
 
@@ -15,25 +15,39 @@ def main_movies(request):
 
 @login_required
 def create_movie(request):
-    form = MovieForm(request.POST or None, request.FILES or None)
+    form_movie = MovieForm(request.POST or None, request.FILES or None)
+    form_additional = AdditionalInfoForm(request.POST or None)
 
-    if form.is_valid():
-        form.save()
+    if form_movie.is_valid() and form_additional.is_valid():
+        movie = form_movie.save(commit=False)
+        additional = form_additional.save()
+        movie.dodatkowe = additional
+        movie.save()
+
         return redirect(main_movies)
 
-    return render(request, 'form_movie.html', {'form': form, 'new': True})
+    return render(request, 'form_movie.html', {'form': form_movie, 'form_additional': form_additional, 'new': True})
 
 
 @login_required
 def update_movie(request, id):
     movie = get_object_or_404(Movie, pk=id)
-    form = MovieForm(request.POST or None, request.FILES or None, instance=movie)
 
-    if form.is_valid():
-        form.save()
-        return redirect(main_movies)
+    try:
+        additional = AdditionalInfo.objects.get(movie=movie.id)
+    except AdditionalInfo.DoesNotExist:
+        additional = None
 
-    return render(request, 'form_movie.html', {'form': form, 'new': False})
+    form_movie = MovieForm(request.POST or None, request.FILES or None, instance=movie)
+    form_additional = AdditionalInfoForm(request.POST or None, instance=additional)
+
+    if form_movie.is_valid() and form_additional.is_valid():
+        movie = form_movie.save(commit=False)
+        additional = form_additional.save()
+        movie.dodatkowe = additional
+        movie.save()
+
+    return render(request, 'form_movie.html', {'form': form_movie, 'form_additional': form_additional, 'new': False})
 
 
 @login_required

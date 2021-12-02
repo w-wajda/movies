@@ -14,7 +14,6 @@ class AdditionalInfo(models.Model):
         (8, 'Romans'),
         (9, 'Sensacyjny')
     }
-
     czas_trwania = models.PositiveSmallIntegerField(default=0)
     gatunek = models.PositiveSmallIntegerField(default=0, choices=GATUNEK)
 
@@ -47,8 +46,17 @@ class Rating(models.Model):
     gwiazdki = models.PositiveSmallIntegerField(default=1, choices=GWIAZDKI)
     film = models.ForeignKey(Movie, on_delete=models.CASCADE)
 
+
+class Actor(models.Model):
+    imie = models.CharField(max_length=20, blank=False)
+    nazwisko = models.CharField(max_length=30, blank=False)
+    filmy = models.ManyToManyField(Movie)
+
     def __str__(self):
-        return self.film
+        return self.name_surname()
+
+    def name_surname(self):
+        return '{} {}'.format(self.imie, self.nazwisko)
 
 
 
