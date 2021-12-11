@@ -2,17 +2,28 @@ from django.db import models
 
 
 class AdditionalInfo(models.Model):
+    INNY = 0
+    HORROR = 1
+    KOMEDIA = 2
+    SCI_FI = 3
+    DRAMAT = 4
+    PRZYGODOWY = 5
+    AKCJI = 6
+    KRZYMINAL = 7
+    ROMANS = 8
+    SENSACYJNY = 9
+
     GATUNEK = {
-        (0, 'Inne'),
-        (1, 'Horror'),
-        (2, 'Komedia'),
-        (3, 'Sci-fi'),
-        (4, 'Dramat'),
-        (5, 'Przygodowy'),
-        (6, 'Akcji'),
-        (7, 'Kryminalny'),
-        (8, 'Romans'),
-        (9, 'Sensacyjny')
+        (INNY, 'Inne'),
+        (HORROR, 'Horror'),
+        (KOMEDIA, 'Komedia'),
+        (SCI_FI, 'Sci-fi'),
+        (DRAMAT, 'Dramat'),
+        (PRZYGODOWY, 'Przygodowy'),
+        (AKCJI, 'Akcji'),
+        (KRZYMINAL, 'Kryminalny'),
+        (ROMANS, 'Romans'),
+        (SENSACYJNY, 'Sensacyjny')
     }
     czas_trwania = models.PositiveSmallIntegerField(default=0)
     gatunek = models.PositiveSmallIntegerField(default=0, choices=GATUNEK)
@@ -35,13 +46,18 @@ class Movie(models.Model):
 
 
 class Rating(models.Model):
-    GWIAZDKI = {
-        (1, '*'),
-        (2, "**"),
-        (3, '***'),
-        (4, '****'),
-        (5, '*****')
-    }
+    VERY_BAD = 0
+    BAD = 1
+    GOOD = 2
+    VERY_GOOD = 3
+
+    GWIAZDKI = [
+        (VERY_BAD, 'Bardzo zły'),
+        (BAD, "Zły"),
+        (GOOD, 'Dobry'),
+        (VERY_GOOD, 'Bardzo dobry'),
+    ]
+
     recenzja = models.TextField(default='', blank=True)
     gwiazdki = models.PositiveSmallIntegerField(default=1, choices=GWIAZDKI)
     film = models.ForeignKey(Movie, on_delete=models.CASCADE)

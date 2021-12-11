@@ -6,6 +6,16 @@ from django.shortcuts import (
 from movies_web.models import Movie, AdditionalInfo, Rating, Actor
 from movies_web.forms import MovieForm, AdditionalInfoForm, RatingForm, ActorForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from movies_web.serializers import UserSerializer
+
+from rest_framework import viewsets
+
+
+class UserView(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
 
 
 def main_movies(request):
