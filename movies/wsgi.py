@@ -8,10 +8,10 @@ https://docs.djangoproject.com/en/3.2/howto/deployment/wsgi/
 """
 
 import os
-from dj_static import Cling
+from dj_static import Cling, MediaCling
 
 from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'movies.settings')
 
-application = Cling(get_wsgi_application())
+application = Cling(MediaCling(get_wsgi_application()))
